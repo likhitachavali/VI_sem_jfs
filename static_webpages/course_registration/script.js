@@ -19,7 +19,6 @@ subjects.forEach(item => {
 // Optional: form submit
 document.getElementById("regForm").addEventListener("submit", function(e){
     e.preventDefault();
-      e.preventDefault();
 
     let selectedSubjects = [];
     let totalFee = 0;
@@ -27,7 +26,7 @@ document.getElementById("regForm").addEventListener("submit", function(e){
     subjects.forEach(sub => {
         if (sub.checked) {
 
-            // Get subject name from the label text
+            // Get subject name from label text
             let subjectName = sub.parentElement.innerText.trim();
             selectedSubjects.push(subjectName);
 
@@ -42,13 +41,17 @@ document.getElementById("regForm").addEventListener("submit", function(e){
 
     let studentName = document.getElementById("name").value;
 
-    let message =
-        "Student Name: " + studentName + "\n\n" +
-        "Selected Subjects:\n- " + selectedSubjects.join("\n- ") + "\n\n" +
-        "Total Fee: ₹" + totalFee;
+    let resultHTML = `
+        <h3>Registration Summary</h3>
+        <p><strong>Student Name:</strong> ${studentName}</p>
+        <p><strong>Selected Subjects:</strong></p>
+        <ol>
+            ${selectedSubjects.map(sub => `<li>${sub}</li>`).join("")}
+        </ol>
+        <p><strong>Total Fee:</strong> ₹${totalFee}</p>
+    `;
 
     let resultBox = document.getElementById("resultBox");
+    resultBox.innerHTML = resultHTML;
     resultBox.style.display = "block";
-    resultBox.innerText = message;
-
 });
