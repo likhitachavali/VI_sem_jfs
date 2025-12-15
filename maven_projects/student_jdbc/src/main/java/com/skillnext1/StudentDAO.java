@@ -6,106 +6,100 @@ import java.util.*;
 public class StudentDAO {
 
     private Connection getConnection() throws Exception {
-	String url = "jdbc:mysql://localhost:3306/skillnext_db";
+        String url = "jdbc:mysql://localhost:3306/student_db";
         String username = "root";
         String password = "4321";  
         return DriverManager.getConnection(url, username, password);
     }
 
-
-    public boolean exists(int id) throws Exception{
-	Connection con = getConnection();
-	String sql = "Select id from student where id=?";
-	PreparedStatement ps = con.prepareStatement(sql);
-	ps.setInt(1,id);
-	ResultSet rs = ps.executeQuery();
-	boolean present = rs.next();
-	con.close();
-	return present;
+    // Check if student exists by ID
+    public boolean exists(int id) throws Exception {
+        Connection con = getConnection();
+        String sql = "SELECT id FROM student WHERE id=?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        boolean present = rs.next();
+        con.close();
+        return present;
     }
 
+    // Insert a student
+    public void insertStudent(Student s) throws Exception {
+        if (exists(s.getId())) {
+            System.out.println("Student with ID " + s.getId() + " already exists!");
+            return;
+        }
 
-    public void insertStudent(Student s) throws Exception{
-	Connection con = getConnection();
-	String sql = "Insert into student(name,sem,dept) values(?,?,?)";
-	PreparedStatement ps = con.prepareStatement(sql);
+        Connection con = getConnection();
+        String sql = "INSERT INTO student(id, name, sem, dept) VALUES(?, ?, ?, ?)";
+        PreparedStatement ps = con.prepareStatement(sql);
 
-        ps.setString(1, st.getName());
-        ps.setInt(2, st.getSem());
-        ps.setString(3, st.getDept());
+        ps.setInt(1, s.getId());
+        ps.setString(2, s.getName());
+        ps.setInt(3, s.getSem());
+        ps.setString(4, s.getDept());
 
         ps.executeUpdate();
         con.close();
+        System.out.println("Student inserted successfully!");
     }
-    
-     public void updateStudent(Student st) throws Exception {
-        Connection con = getConnection();
 
+    // Update a student
+    public void updateStudent(Student s) throws Exception {
+        if (!exists(s.getId())) {
+            System.out.println("Student with ID " + s.getId() + " does not exist!");
+            return;
+        }
+
+        Connection con = getConnection();
         String sql = "UPDATE student SET name=?, sem=?, dept=? WHERE id=?";
-        PreparedStatement stmt = con.prepareStatement(sql);
+        PreparedStatement ps = con.prepareStatement(sql);
 
-        stmt.setString(1, st.getName());
-        stmt.setInt(2, st.getSem());
-        stmt.setString(3, st.getDept());
-        stmt.setInt(4, st.getId());
+        ps.setString(1, s.getName());
+        ps.setInt(2, s.getSem());
+        ps.setString(3, s.getDept());
+        ps.setInt(4, s.getId());
 
-        stmt.executeUpdate();
+        ps.executeUpdate();
         con.close();
+        System.out.println("Student updated successfully!");
     }
-    
+
+    // Delete a student
     public void deleteStudent(int id) throws Exception {
+        if (!exists(id)) {
+            System.out.println("Student with ID " + id + " does not exist!");
+            return;
+        }
+
         Connection con = getConnection();
-
-        String sql = "DELETE FROM student WHERE id = ?";
-        PreparedStatement stmt = con.prepareStatement(sql);
-
-        stmt.setInt(1, id);
-        stmt.executeUpdate();
+        String sql = "DELETE FROM student WHERE id=?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, id);
+        ps.executeUpdate();
         con.close();
+        System.out.println("Student deleted successfully!");
     }
-    
+
+    // Get all students
     public List<Student> getAllStudents() throws Exception {
         Connection con = getConnection();
-
         String sql = "SELECT * FROM student";
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
 
         List<Student> list = new ArrayList<>();
-
         while (rs.next()) {
             Student s = new Student();
             s.setId(rs.getInt("id"));
             s.setName(rs.getString("name"));
             s.setSem(rs.getInt("sem"));
             s.setDept(rs.getString("dept"));
-
             list.add(s);
         }
 
         con.close();
         return list;
     }
-
-  
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   

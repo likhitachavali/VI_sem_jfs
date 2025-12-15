@@ -6,43 +6,42 @@ public class Student {
     private int sem;
     private String dept;
 
-    
     public Student() {}
- 
-    public Student(int id,String name, int sem, String dept){
-    	this.id = id;
-	this.name = name;
-	this.sem = sem;
-	this.dept =dept;
+
+    public Student(int id, String name, int sem, String dept) {
+        this.id = id;
+        this.name = name;
+        this.sem = sem;
+        this.dept = dept;
     }
 
-    //getters & setters
-    public int getId(){
-	return id;	
+    // Getters & Setters
+    public int getId() {
+        return id;
     }
-    public void setId(int id){
-    	this.id = id;
-    }
-
-    public int getName(){
-	return name;	
-    }
-    public void setName(String name){
-    	this.name = name;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getSem(){
-	return sem;	
+    public String getName() {
+        return name;
     }
-    public void setSem(int sem){
-    	this.sem = sem;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getDept(){
-	return dept;	
+    public int getSem() {
+        return sem;
     }
-    public void setDept(String dept){
-    	this.dept = dept;
+    public void setSem(int sem) {
+        this.sem = sem;
+    }
+
+    public String getDept() {
+        return dept;
+    }
+    public void setDept(String dept) {
+        this.dept = dept;
     }
 
     @Override
@@ -52,6 +51,4 @@ public class Student {
                ", sem=" + sem +
                ", dept=" + dept + "]";
     }
-
-    
 }

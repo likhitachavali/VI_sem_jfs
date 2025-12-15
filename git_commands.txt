@@ -15,3 +15,30 @@ if you can add any files in local repository or you can change the existing file
 2. git add .
 3. git commit -m "message"
 4. git push origin master
+-------------------------------------------------------
+
+1. clear the screen: cls
+2. creating directory: mkdir <nameOfFolder>
+3. To hide the folder: attrib +h <nameOfFolder>
+4. To unhide the folder: attrib -h <nameOfFolder>
+5. To remove directory(empty): rmdir <nameOfFolder>
+6. To remove a directory with content(non-empty): rmdir /s /q .<nameOfFolder>
+7. To display hidden directories: dir /a:h
+8. To rename a folder: rename <existing_folder> <new_folder>
+9. To display content of a file: type <file_name>
+10. To display folders: dir
+11. To create a new text file: notepad  filename.txt
+12. To forward the content of one file to another file: type 1file_name>2file_name
+    type mayuri.txt>Anurag.txt
+13. To delete a file: del <file_name>
+14. To delete all text files: del *.txt
+                  java files: del *.java
+                  html files: del *.html
+15. The list of wild characters: ? - single character
+                                 * - 0 or more characters
+
+16. To display all single character named file with extension .txt: 
+
+17. If you want to retrieve remote repository to local pc: git clone <url of the folder you want to clone>
+
+
