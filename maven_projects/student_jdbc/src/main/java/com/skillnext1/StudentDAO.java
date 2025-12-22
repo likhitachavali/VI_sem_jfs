@@ -121,7 +121,7 @@ public class StudentDAO {
             while (rs.next()) {
                 String dept = rs.getString("dept");
                 int count = rs.getInt("count");
-                System.out.printf("%-15s %d\n", dept, count);
+                System.out.printf(dept + ":" + count);
             }
 
         } catch (SQLException e) {
